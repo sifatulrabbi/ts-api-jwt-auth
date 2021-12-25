@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
-import * as jwt from 'jsonwebtoken';
-import { configs } from '../configs';
-import { IUser } from '../typings';
+import { Request, Response, NextFunction } from "express";
+import * as jwt from "jsonwebtoken";
+import { configs } from "../configs";
+import { IUser } from "../typings";
 
 export function verifyJwtToken(
   req: Request,
@@ -10,13 +10,13 @@ export function verifyJwtToken(
 ): void {
   const bearer = req.headers.authorization;
 
-  if (!bearer || !bearer.startsWith('Bearer ')) {
-    res.status(403).json({ message: 'Bearer token needed' });
+  if (!bearer || !bearer.startsWith("Bearer ")) {
+    res.status(403).json({ message: "Bearer token needed" });
     return;
   }
 
   try {
-    const token = bearer.split('Bearer ')[1];
+    const token = bearer.split("Bearer ")[1];
     const payload = jwt.verify(token, configs.JWT_SECRET);
 
     //@ts-ignore
@@ -26,6 +26,6 @@ export function verifyJwtToken(
 
     next();
   } catch (err) {
-    res.status(403).json({ error: 'Login expired please login again' });
+    res.status(403).json({ error: "Login expired please login again" });
   }
 }

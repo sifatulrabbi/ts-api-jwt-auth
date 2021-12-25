@@ -1,11 +1,11 @@
-import { Router, Request, Response } from 'express';
-import { authService } from './auth';
-import { usersService } from './users';
+import { Router, Request, Response } from "express";
+import { authService } from "./auth";
+import { usersService } from "./users";
 import {
   verifyJwtToken,
   validateCreateData,
   validateLoginData,
-} from './middlewares';
+} from "./middlewares";
 
 class Controller {
   private router: Router;
@@ -13,15 +13,15 @@ class Controller {
   constructor() {
     this.router = Router();
 
-    this.router.get('/', this.getHello);
-    this.router.get('/all', this.getAll);
+    this.router.get("/", this.getHello);
+    this.router.get("/all", this.getAll);
 
-    this.router.post('/login', validateLoginData, this.login);
-    this.router.post('/logout', this.logout);
+    this.router.post("/login", validateLoginData, this.login);
+    this.router.post("/logout", this.logout);
 
-    this.router.get('/profile', verifyJwtToken, this.getProfile);
-    this.router.post('/profile', validateCreateData, this.create);
-    this.router.delete('/profile', this.create);
+    this.router.get("/profile", verifyJwtToken, this.getProfile);
+    this.router.post("/profile", validateCreateData, this.create);
+    this.router.delete("/profile", this.create);
   }
 
   get routes(): Router {
@@ -29,7 +29,7 @@ class Controller {
   }
 
   private getHello(req: Request, res: Response) {
-    res.status(200).json({ message: 'Hello world' });
+    res.status(200).json({ message: "Hello world" });
   }
 
   private async getAll(req: Request, res: Response) {
@@ -41,8 +41,8 @@ class Controller {
     try {
       const token = authService.login(req.body.username, req.body.password);
 
-      res.cookie('jwt', token).status(200).json({
-        message: 'Login successful',
+      res.cookie("jwt", token).status(200).json({
+        message: "Login successful",
       });
     } catch (err) {
       res.status(403).json({ message: String(err) });
@@ -69,7 +69,7 @@ class Controller {
 
   private remove(req: Request, res: Response) {
     usersService.remove(req.params.id);
-    res.status(200).json({ message: 'User removed' });
+    res.status(200).json({ message: "User removed" });
   }
 }
 

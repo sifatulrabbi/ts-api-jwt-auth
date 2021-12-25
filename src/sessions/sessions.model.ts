@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose';
-import { IRefreshToken } from '../typings';
+import { Schema, model } from "mongoose";
+import { IRefreshToken } from "../typings";
 
 const sessionsSchema = new Schema<IRefreshToken>({
   token: { type: String, required: true },
@@ -7,4 +7,4 @@ const sessionsSchema = new Schema<IRefreshToken>({
   exp_at: { type: Number, required: true },
 });
 
-export const sessionsModel = model('sessions', sessionsSchema);
+export const sessionsModel = model("sessions", sessionsSchema);

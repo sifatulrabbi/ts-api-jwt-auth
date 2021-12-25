@@ -1,5 +1,5 @@
-import { sessionsModel } from './sessions.model';
-import { IRefreshTokenDoc } from '../typings';
+import { sessionsModel } from "./sessions.model";
+import { IRefreshTokenDoc } from "../typings";
 
 class SessionsService {
   async create(token: string): Promise<string> {
@@ -18,11 +18,11 @@ class SessionsService {
     const refreshToken: IRefreshTokenDoc = await sessionsModel.findById(id);
 
     if (!refreshToken) {
-      throw 'Invalid token id';
+      throw "Invalid token id";
     }
 
     if (refreshToken.exp_at < Date.now()) {
-      throw 'Loin session Expired please login again';
+      throw "Loin session Expired please login again";
     }
 
     return refreshToken.token;

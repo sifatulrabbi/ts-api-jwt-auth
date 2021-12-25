@@ -1,18 +1,18 @@
-import * as jwt from 'jsonwebtoken';
-import { configs } from '../configs';
-import { usersService } from '../users';
-import { IUser } from '../typings';
+import * as jwt from "jsonwebtoken";
+import { configs } from "../configs";
+import { usersService } from "../users";
+import { IUser } from "../typings";
 
 export class Service {
   async login(username: string, password: string): Promise<string> {
     const user = await usersService.getOneUser({ username });
 
     if (!user) {
-      throw 'User not found';
+      throw "User not found";
     }
 
     if (user.password !== password) {
-      throw 'Incorrect password';
+      throw "Incorrect password";
     }
 
     const payload: IUser = {
@@ -21,7 +21,7 @@ export class Service {
       password: user.password,
     };
     const token: string = jwt.sign(payload, configs.JWT_SECRET, {
-      algorithm: 'HS512',
+      algorithm: "HS512",
       expiresIn: 300,
     });
 

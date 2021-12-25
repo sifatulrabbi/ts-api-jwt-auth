@@ -1,5 +1,5 @@
-import { IUser, IUserDocument } from '../typings';
-import { usersModel } from './users.models';
+import { IUser, IUserDocument } from "../typings";
+import { usersModel } from "./users.models";
 
 class UsersService {
   async getAllUser(): Promise<IUserDocument[]> {
@@ -26,7 +26,7 @@ class UsersService {
   async create({
     username,
     password,
-  }: Omit<IUser, '_id'>): Promise<IUserDocument> {
+  }: Omit<IUser, "_id">): Promise<IUserDocument> {
     const newUser = await new usersModel({ username, password }).save();
     return newUser;
   }
@@ -35,7 +35,7 @@ class UsersService {
     const user = await this.getOneUser({ id });
 
     if (!user) {
-      throw 'User not found';
+      throw "User not found";
     }
 
     user.remove();
