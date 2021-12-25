@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "declaration": true,
+    "typeRoots": ["node_modules/@types", "src/typings"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "removeComments": true,
+    "strict": true,
+    "sourceMap": true,
+    "rootDir": "./src"
+  },
+  "include": ["src/typings/*.d.ts", "src/*.ts, src/**/.ts"],
+  "exclude": ["dist", "node_modules"]
+}
